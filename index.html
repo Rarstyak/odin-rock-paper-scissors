@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Odin Rock Paper Scissors</title>
+</head>
+<body>
+    <script>
+        function getComputerChoice() {
+            let choice = Math.floor(Math.random() * 3);
+            switch (choice) {
+                case 0: 
+                    choice = "Rock";
+                    break;
+                case 1: 
+                    choice = "Paper";
+                    break;
+                case 2: 
+                    choice = "Scissors";
+                    break;
+                default:
+                    console.log("ERROR");
+                    break;
+            }
+            return choice;
+        }
+
+        function getPlayerChoice() {
+            return prompt("Rock, Paper, or Scissors?").toLowerCase();
+        }
+
+        function playRound(playerSelection, computerSelection) {
+            let player = playerSelection.toLowerCase();
+            let computer = computerSelection.toLowerCase();
+            let result;
+            switch (player) {
+                case "rock": 
+                    switch (computer) {
+                        case "rock":
+                            result = "You Tie! You both picked Rock!";
+                            break;
+                        case "paper":
+                            result = "You Lose! Rock is beaten by Paper!";
+                            break;
+                        case "scissors":
+                            result = "You Win! Rock beats Scissors!";
+                            break;
+                    }
+                    break;
+                case "paper":
+                    switch (computer) {
+                        case "rock":
+                            result = "You Win! Paper beats Rock!";
+                            break;
+                        case "paper":
+                            result = "You Tie! You both picked Paper!";
+                            break;
+                        case "scissors":
+                            result = "You Lose! Paper is beaten by Scissors!";
+                            break;
+                    }
+                    break;
+                case "scissors":
+                    switch (computer) {
+                        case "rock":
+                            result = "You Lose! Scissors is beaten by Rock!";
+                            break;
+                        case "paper":
+                            result = "You Win! Scissors beats Paper!";
+                            break;
+                        case "scissors":
+                            result = "You Tie! You both picked Scissors!";
+                            break;
+                    }
+                    break;
+                default:
+                    console.log("Invalid Player Selection");
+                    break;
+            }
+            return result;
+        }
+
+        function game() {
+            let wins = 0;
+            for (let i = 0; i < 5; i++) {
+                if (playRound(getPlayerChoice(), getComputerChoice()).includes("Win")) {
+                    wins++;
+                }
+            }
+            console.log(`You won ${wins} times out of five!`);
+            if (wins >= 3) {
+                console.log("You won the game!");
+            } else {
+                console.log("You lost the game!");
+            }
+        }
+
+        game();
+    </script>
+</body>
+</html>
